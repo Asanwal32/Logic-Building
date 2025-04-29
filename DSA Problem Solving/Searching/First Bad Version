@@ -51,3 +51,67 @@ public class Solution extends VersionControl {
 ----------------------------------------------------------------------------
 Optimized Binary Search Approach
 
+public class Solution extends VersionControl {
+    public int firstBadVersion(int n) {
+        int start = 1, end =n, ans =0;
+//This loop is to find the true element fo BadVersion
+        while(start<=end)
+        {   
+            int middle = start + (end - start)/2;
+
+            if(isBadVersion(middle))
+            {
+//This is to find firstOccourance of that BadVerison True
+               return(SearchFirst(start,middle-1));
+            }
+//Shifting start if till middle BadVersion is False
+            else{
+                start = middle+1;
+            }
+        }
+        return ans;
+    }
+
+    public int SearchFirst(int start,int end)
+    {
+        int ans = end+1;
+        while(start<=end)
+        {
+            int middle = start + (end - start)/2; 
+            if(isBadVersion(middle))
+                {
+                    ans = middle;
+                    end = middle -1;
+                }
+            else{
+                start = middle+1;
+            }
+        }
+        return ans;
+    }
+}
+
+-------------------------------------------------------------------
+
+Another Way of solving in one Loop
+public class Solution extends VersionControl {
+    public int firstBadVersion(int n) {
+        int start = 1, end =n, ans =0;
+        while(start<=end)
+        {  
+            int middle = start + (end - start)/2; 
+            if(isBadVersion(middle))
+            {
+               ans = middle;
+               end = middle -1;
+            }
+            else{
+                start = middle+1;
+            }
+        }
+        return ans;
+    }
+}
+
+--------------------------------------------------------------------------------
+
